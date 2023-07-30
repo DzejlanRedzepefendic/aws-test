@@ -16,6 +16,8 @@ export function decryptWithAES(encryptedData, key) {
 export function decryptFile(privateKey, encryptedFilePath, encryptedAESKeyPath) {
     try {
         const encryptedAESKey = fs.readFileSync(encryptedAESKeyPath);
+        console.log(encryptedAESKey);
+        console.log(privateKey, encryptedFilePath, encryptedAESKeyPath);
 
         // Decrypt the AES key using the RSA private key
         const aesKey = crypto
@@ -42,8 +44,8 @@ export function generateFilePath(fileName) {
     return path.join(__dirname, "..", "config", fileName);
 }
 
-const privateKey = process.env.DECRYPTION_PRIVATE_KEY
-    ? process.env.DECRYPTION_PRIVATE_KEY
+const privateKey = process.env.ENCRYPTION_PRIVATE_KEY
+    ? process.env.ENCRYPTION_PRIVATE_KEY
     : path.join(__dirname, "..", "private.pem");
 
 const key = fs.existsSync(privateKey) ? fs.readFileSync(privateKey, "utf8") : privateKey;

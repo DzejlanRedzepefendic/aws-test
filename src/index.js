@@ -5,7 +5,7 @@ const cors = require("cors");
 const config = require("config");
 
 app.use(cors());
-const serverName = config.get("server.name") ?? "Paralelelni univerzum";
+const serverName = config.has("server.name") ? config.get("server.name") : "Default Server Name";
 // Endpoint to get the server status
 app.get("/status", (req, res) => {
     res.json({ status: `Server is up and running! Server name: ${serverName}` });
